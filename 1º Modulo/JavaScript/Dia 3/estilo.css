@@ -1,0 +1,85 @@
+h1{
+	margin: 35px;
+	clear:both;
+	padding: 15px;
+	text-align:center;
+	font-family: 30px MiFuente, verdana;
+	color: #651E1D;
+	text-shadow: rgba(64,20,12,0.5) 2px 2px 4px;
+}
+aside{
+	position: fixed;
+	border: ridge 1px #FE5B5B;
+	box-shadow: rgb(0,0,0) 5px 10px 10px;
+	float:right;
+	width:250px;
+	margin:9px 9px 9px 700px;
+	background:#9DF3FF;
+	padding:25px;
+	text-align:center;
+	border-radius: 25px / 25px;
+}
+aside input{
+	margin:5px;
+}
+ul{
+	color:white;
+	text-align:left;
+	background:#2E3A40;
+	border-radius: 25px / 25px;
+}
+li{
+	color:#B7E7FF;
+}
+body{
+	background: linear-gradient(to bottom left, #146365, #5AAFB2, white);
+	margin: 15px 125px 25px 125px;
+	width:1000px;
+}
+header{
+	background:#FFD6B7;
+	border: solid 1px #651010;
+	border-radius: 45px / 25px;
+	box-shadow: rgba(150,150,150,2) 5px 10px 10px;
+}
+form{
+	text-align:right;
+	background:#2E3A40;
+	margin:20px;
+	border-radius: 25px / 25px;
+}
+form input {
+	margin:15px 125px 15px 15px;
+}
+table{
+	margin:25px;
+	width:550px;
+	background:#2E3A40;
+}
+td{
+	width:50px;
+}
+section{
+	float:right;
+	width:680px;
+	margin:10px 310px 10px 10px;
+	background:#4AA6B2;
+	border-radius: 30px / 25px;
+}
+article{
+	margin:20px;
+	padding:1px 15px;
+	border: ridge 1px black;
+	box-shadow: rgb(10,10,10) 5px 10px 10px;
+	background:#5C747F;
+	text-align:left;
+	color:white;
+	border-radius: 20px / 20px;
+	text-align:center;
+}
+article ul, form{
+	padding:25px;
+}
+p{
+	text-align:left;
+}

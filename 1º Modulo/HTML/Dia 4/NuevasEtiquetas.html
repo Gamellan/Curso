@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Nuevas etiquetas HTML5</title>
+			<meta charset="UTF-8">
+			<link rel="stylesheet" href="" type="text/css">
+			<!--<style>
+				El simbolo ">" hace que sean solo los hijos directos
+				div > span{
+					color:red;
+					}
+			</style>-->
+		</head>
+		<body> 
+			<main>
+				<div>
+					<p>Hola <span>Adios</span></p>
+				</div>
+				<details>
+					<summary><mark>Pinchame pinchame!!</mark></summary>
+					<p>Hola hola</p>
+					<p>Adios</p>
+				</details>
+				<figure>
+					<img src="Recursos/saitama.jpg" alt="oh no" width="400px" height="250px">
+					<figcaption>El gran Saitama</figcaption>
+				</figure>
+				<progress value="21" max="100"></progress><br/><br/>
+				<video width="320" height="240" controls autoplay> <!-- controls sirve para mostrar los controles del video, reproducir agrandar etc -->
+				<!-- Primera intenta ejecutar el de arriba, si no va bajando. -->
+					<source src="Recursos/movie.mp4" type="video/mp4">
+					<source src="Recursos/movie.webm" type="video/webm"> 
+					Your browser does not support the video tag. 
+				</video>
+				<audio controls>
+					<source src="Recursos/audio.mp3" type="audio/mp3">
+					<source src="Recursos/audio.ogg" type="audio/ogg">
+				</audio><br/>
+				<!-- embed y object hacen lo mismo -->
+				<embed width="400" height="250" src="Recursos/document.pdf" /> 
+				<object width="400" height="250" data="Recursos/movie.webm" />
+			</main>
+		</body>
+	</html>

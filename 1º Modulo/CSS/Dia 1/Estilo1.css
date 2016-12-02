@@ -1,0 +1,8 @@
+body {background-color:#FFF0F5;text-align:center}
+#tituloP {color:white;font-size:40;background-color:#B8860B;border: solid 5px BLUE;margin: 10px 0px 25px 0px;padding: 10px 30px}
+h2 {color:RED}
+p#p01 {color:blue;font-family:verdana;}
+p {color:green;font-family:comic-sans;}
+.error {color:#B8860B}
+.noticia {background-color:#B8860B;border: dotted 4px black;padding: 40px 20px;margin: 60px 30px}
+.titulo {color:GREEN}

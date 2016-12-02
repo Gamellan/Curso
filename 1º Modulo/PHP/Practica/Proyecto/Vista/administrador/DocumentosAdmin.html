@@ -1,0 +1,163 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Panel de administración </title> 
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="./css/plantilla_documentosAdmin.css">
+		<script type="text/javascript" src="./js/documentos.js"></script>
+	</head>
+	<body>
+		<main>
+			<header></header>
+			<aside>
+				<div id="logo">
+					<img src="./imagenes/logo.gif" width="150px" height="150px">
+				</div>
+				<ul>
+					<li><a href="usuariosAdmin.html"><img src="./imagenes/icono_usuario.png"/> Usuarios</a></li>
+					<li><a href="noticiasAdmin.html"><img src="./imagenes/icono_noticia.png"/> Noticias</a></li>
+					<li><a href="documentosAdmin.html"><img src="./imagenes/icono_documento.png"/> Documentos</a></li>
+					<li><a href="eventosAdmin.html"><img src="./imagenes/icono_evento.png"/> Eventos</a></li>
+					<li><a href="multimediaAdmin.html"><img src="./imagenes/icono_multimedia.png"/> Multimedia</a></li>
+				</ul>	
+			</aside>
+			<section>
+				<div id="encabezado">
+					<h1>Documentos</h1>
+				</div><br/>
+				<details id="nuevo"open>
+					<summary>CREAR DOCUMENTO</summary></br>
+					<form ENCTYPE="multipart/form-data" name="formulario" method="post">
+						</br><h2>Nuevo documento:</h2></br>
+						<table id="formularioDocumento">
+							<tr>
+								<td id="titulo">Título:</td>
+								<td><input type="text" name="titulo"/></td>
+							</tr>
+							<tr>
+								<td>Descripci&oacute;n:</td>
+								<td colspan="3"><textarea id="descripcion" rows="3" cols="60"></textarea></td>
+							</tr>
+							<tr>
+								<td>Fecha publicación:</td>
+								<td><input type="date" name="fPublicacion"/></td>
+							</tr>
+							<tr>
+								<td>Tipo:</td>
+								<td>
+									<input type="radio" id="ley" value="Ley" name="tipo" selected/> Ley
+									<input type="radio" id="ley" value="Documento" name="tipo"/> Documento
+								</td>
+							</tr>
+						</table>
+						<br/>
+						<div id="formAdjuntar">
+							<h2>Nuevo archivo:</h2>
+							<table>
+								<tr>
+									<td colspan="2" id="zona">
+										<input type="radio" value="publico" name="zona" selected/> Zona Pública
+										<input type="radio" value="privado" name="zona"/> Zona Privada
+									</td>
+								</tr>
+								<tr>
+									<td><input type='radio' onChange="habilitarArchivo()" name='upload' value='archivo'>  Adjuntar archivo: </td>
+									<td id='adjuntar'><input name='imagen' type='file'></td>
+								</tr>
+								<tr>
+									<td><input type='radio' onChange="habilitarURL()" name='upload' value='url'> Introducir url: </td>
+									<td id='introducir'><input name='urlImagen' type='text' size='30'></td>
+								</tr>
+							</table>
+							<div>
+								<button onclick="aniadirEvento()" id="adjuntarImagen"><img src="./imagenes/icono_adjuntar.png"/> Adjuntar</button>
+							</div>
+						</div></br>
+						<div>
+							<button onclick="aniadirEvento()"><img src="./imagenes/icono_agregar.png"/> Agregar</button>
+						</div></br>
+					</form><br/>
+					
+					
+				</details>
+				</br>
+				<details id="listadoDocumento">
+					<summary>LISTADO DE DOCUMENTOS</summary></br>
+					<table id="documentoD">
+						<tr>
+							<td id="imgDocumento" valign="top">
+								<button><img src="./imagenes/icono_pdf.png"/></button>
+								<p style="color:red">Privado</p>
+								Congreso CCOO</br>
+								<i>Publicado: 11/11/2016</i></br>
+							</td>
+							
+						</tr>
+					</table>
+					<div id="botones">
+						<button id="modificar" title="Modificar"><img src="./imagenes/icono_modificar.png" width="18px" height="18px"></button></br>
+						<button id="eliminar" title="Eliminar"><img src="./imagenes/icono_eliminar.png" width="18px" height="18px"></button>			
+					</div>
+					<table id="documentoD">
+						<tr>
+							<td id="imgDocumento" valign="top">
+								<button><img src="./imagenes/icono_explorer.png"/></button>
+								<p style="color:green">Público</p>
+								Congreso CCOO</br>
+								<i>Publicado: 11/11/2016</i></br>
+							</td>
+							
+						</tr>
+					</table>
+					<div id="botones">
+						<button id="modificar" title="Modificar"><img src="./imagenes/icono_modificar.png" width="18px" height="18px"></button><br/>
+						<button id="eliminar" title="Eliminar"><img src="./imagenes/icono_eliminar.png" width="18px" height="18px"></button>			
+					</div>
+					<div style="clear:left"></br></div>
+				</details>
+				<br/>
+				<details id="listadoLey">
+					<summary>LISTADO DE LEYES</summary></br>
+					<table id="documentoD">
+						<tr>
+							<td id="imgDocumento" valign="top">
+								<button><img src="./imagenes/icono_pdf.png"/></button>
+								<p style="color:red">Privado</p>
+								Congreso CCOO</br>
+								<i>Publicado: 11/11/2016</i></br>
+							</td>
+							
+						</tr>
+					</table>
+					<div id="botones">
+						<button id="modificar" title="Modificar"><img src="./imagenes/icono_modificar.png" width="18px" height="18px"></button></br>
+						<button id="eliminar" title="Eliminar"><img src="./imagenes/icono_eliminar.png" width="18px" height="18px"></button>			
+					</div>
+					<table id="documentoD">
+						<tr>
+							<td id="imgDocumento" valign="top">
+								<button><img src="./imagenes/icono_explorer.png"/></button>
+								<p style="color:green">Público</p>
+								Congreso CCOO</br>
+								<i>Publicado: 11/11/2016</i></br>
+							</td>
+							
+						</tr>
+					</table>
+					<div id="botones">
+						<button id="modificar" title="Modificar"><img src="./imagenes/icono_modificar.png" width="18px" height="18px"></button></br>
+						<button id="eliminar" title="Eliminar"><img src="./imagenes/icono_eliminar.png" width="18px" height="18px"></button>			
+					</div>
+					<div style="clear:left"></br></div>
+				</details>
+				
+				
+			</section>
+		</main>
+		
+	</body>
+	
+	
+</html>

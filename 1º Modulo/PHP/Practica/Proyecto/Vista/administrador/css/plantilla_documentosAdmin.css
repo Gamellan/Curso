@@ -1,0 +1,222 @@
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	text-align:center;
+}
+
+main{
+	font-family:Arial;
+	margin:auto auto;
+	width:1150px;
+}
+
+header{
+	width:1150px;
+	height:20px;
+}
+
+aside{
+	width:250px;
+	height:550px;
+	display:inline-block;
+	float:left;
+	background: #4D8ECB;
+	
+}
+
+#logo{
+	margin:20px auto;
+	width:150px;
+	height:150px;
+}
+
+a img{
+	width:18px;
+	height:18px;
+	vertical-align:middle;
+}
+
+aside ul li{
+	border-top:1px solid #3CB1CB;
+	border-bottom:1px solid #3CB1CB;
+	padding:15px 60px;
+	text-align: left;
+	list-style-type: none;
+}
+
+a{
+	text-decoration: none;
+	color:#ffffff;
+	font-size: 20px;
+	font-family:fontMenu;
+}
+@font-face{
+    font-family: 'fontMenu';
+    src: url('fuente_menu.ttf');
+}
+
+li:hover{
+	background: #3CB1CB;
+}
+
+section{
+	text-align:left;
+	width:830px;
+	display:inline-block;
+	float:left;
+	padding-left:30px;
+	padding-bottom:100px;
+}
+
+#encabezado{
+	text-align:right;
+	background: #4D8ECB;
+	padding-right:20px;
+}
+
+h1{
+	font-size: 35px;
+	font-family:fontMenu;
+	color:white;
+}
+
+h2,summary{
+	font-size: 20px;
+	font-family:fontMenu;
+	color:#4D8ECB;
+}
+
+button{
+	padding:10px 10px;
+	background:#4D8ECB;
+	border:0px;
+	color:#ffffff;
+	font-size: 18px;
+	font-family:fontMenu;
+	cursor:pointer;
+	/*border-radius:5px;*/
+}
+
+button:hover{
+	background: #3CB1CB;
+	transform:scale(1.05,1.05);
+}
+
+button img{
+	width:18px;
+	height:18px;
+	vertical-align:middle;
+}
+
+form{
+	border:1px solid #4D8ECB;
+	padding:0px 30px;
+	width:600px;
+	margin-left:30px
+}
+
+form div{
+	text-align:right;
+}
+#formularioDocumento tr td:nth-child(odd) {
+    font-weight:bold;
+	font-size:15px;
+}
+#formularioDocumento tr td:nth-child(even) {
+    font-size:15px;
+	font-family:Arial;
+}
+ 
+#formularioDocumento tr{
+	height:20px;
+}
+
+#formularioDocumento tr img{
+	width:18px;
+	height:18px;
+	vertical-align:middle;
+}
+
+input,textarea,select,option{
+	border-radius:5px
+}
+
+details summary::-webkit-details-marker {
+    color: #4D8ECB;
+    font-size: 20px;
+	cursor:pointer;
+}
+
+summary{
+	cursor:pointer;
+	outline:none;
+}
+
+details{
+	border-radius: 10px;
+	background-color:#EAEAEA;
+	padding: 12px;
+	
+}
+
+#listadoLey,#listadoDocumento{
+	overflow: auto;
+}
+
+#documentoD,#documentoL{
+	border:1px solid #4D8ECB;
+	width:140px;
+	display:inline-block;
+	float: left;
+	margin-left:20px
+}
+
+#imgDocumento{
+	font-size:12px;
+	padding:5px 5px;
+	text-align:center;
+}
+
+#imgDocumento img{
+	width:60px;
+	height:60px;
+	padding:3px;
+	vertical-align:middle;
+}
+
+#imgDocumento button{
+	background-color:transparent;
+}
+
+#botones{
+	display:inline-block;
+	float: left;
+}
+
+aside,#encabezado,details{
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+#formAdjuntar{
+	border:1px solid #4D8ECB;
+	text-align:left;
+	width:500px;
+	padding:5px;
+}
+
+#formAdjuntar tr td:nth-child(odd) {
+    font-weight:bold;
+	font-size:15px;
+}
+
+#zona{
+	padding-bottom:20px;
+}
+
+
+
+

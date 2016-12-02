@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Galeria de las curiosidades</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="" type="text/css">
+	</head>
+	<body> 
+			<form name="Registro" action="formulario.php" method="GET">
+				Nombre: <input type="text" name="nombre" autofocus></input><br/>
+				Contraseña: <input type="password" name="pass"></input><br/><br/><br/><br/>
+				Mi color favorito es: <input type="color" name="micolor"></input><br/>
+				<input type="date" name="fecha"></input><br/>
+				<input type="radio" name="sex" value="Hombre">Hombre<br/></input>
+				<input type="radio" name="sex" value="Mujer">Mujer</input><br/>
+				<input type="checkbox" name="vehiculo" value="bici">Tengo una bici<br/> 
+				<input type="checkbox" name="vehiculo" value="coche" checked>Tengo un coche<br/>
+				<select name="coche">
+					<option value="volvo">Volvo</option>
+					<option value="saab" selected>Saab</option>
+					<option value="fiat">Fiat</option>
+					<option value="audi">Audi</option>
+				</select><br/>
+				<h3>Comentarios:</h3><br/>
+				<textarea name="comentarios" rows="15" cols="100"></textarea><br/>
+				<input type="submit" value="Enviar">
+				<button name="reset" type="reset" value="Borrar">Borrar</button>
+				<button name="boton" type="button" value="Cliqueame">Cliqueame!</button>
+			</form>
+	</body>
+</html>

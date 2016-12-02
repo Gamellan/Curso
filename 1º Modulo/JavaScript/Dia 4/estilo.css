@@ -1,0 +1,75 @@
+#info{
+	color:#FF4554;
+}
+#nom{
+	position:relative;
+	left:100px;
+}
+#ape{
+	position:relative;
+	left:90px;
+}
+#fNac{
+	position:relative;
+	left:39px;
+}
+#nomUsu{
+	position:relative;
+	left:25px;
+}
+#correoE{
+	position:relative;
+	left:30px;
+}
+#pass{
+	position:relative;
+	left:81.05px;
+}
+#vpass{
+	position:relative;
+	left:2.5px;
+}
+#boton{
+	position:relative;
+	left:65px;
+}
+header{
+	text-align:center;
+	margin: 50px 25px 25px 25px;
+	background:#B27854;
+	border: solid 1px #651010;
+	border-radius: 30px /30px;
+	color: #FFDFC1;
+}
+body{
+	color:white;
+	background:#7F7061;
+	width:750px;
+	margin:10px 300px 10px 300px;
+}
+form{
+	width: 350px;
+	margin: 50px 100px 50px 100px;
+	padding: 20px 50px 25px 50px;
+	background:#1C6365;
+	border-radius: 30px /30px;
+}
+form input{
+	margin:3px;
+	padding:4px;
+}
+table{
+	width:700px;
+	margin: 10px 25px 10px 25px;
+	background:#544B51;
+	color:#9CFFD1;
+	border-radius: 30px /30px;
+	padding:5px;
+	border: solid 1px #B25749;
+}
+table td{
+	padding:5px;
+}
+table th{
+	color:#FECEB0;
+}

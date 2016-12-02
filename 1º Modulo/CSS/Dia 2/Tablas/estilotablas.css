@@ -1,0 +1,12 @@
+table, td, th{
+	
+		border: 3px solid orange;
+		text-align:center;
+		
+		}
+caption{
+	
+	font-size:30;
+	color:BLUE
+	
+}

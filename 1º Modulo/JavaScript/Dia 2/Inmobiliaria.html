@@ -1,0 +1,129 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+	<head> 
+		<title>Inmobiliaria</title> 
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="estilo.css"> 
+		<script>
+		
+			function llamarP(){
+				if(document.getElementById("per").value=="persona1"){
+					mostrarPersona(persona1);
+				}else if(document.getElementById("per").value=="persona2"){
+					mostrarPersona(persona2);
+				}else{
+					alert("Escribe 'persona1' o 'persona2'");
+				}
+			}
+			
+			function mostrarPersona(persona){
+				document.getElementById("fot").src=persona["foto"];
+				document.getElementById("nom").innerHTML="Nombre: "+persona["nombre"];
+				document.getElementById("ape").innerHTML="Apellido: "+persona["apellido"];
+				document.getElementById("dni").innerHTML="DNI: "+persona["DNI"];
+				document.getElementById("cuent").innerHTML="Nº cuenta: "+persona.cuenta["numero"];
+				document.getElementById("cuent2").innerHTML="Dinero en cuenta: "+persona.cuenta["dinero"];
+			}
+			
+			function mostrarCasa(casa){
+				document.getElementById("fotC").src=casa["foto"];
+				document.getElementById("prec").innerHTML="Precio: "+casa["precio"];
+				document.getElementById("dir").innerHTML="Direccion: "+casa["direccion"];
+				document.getElementById("met").innerHTML="Metros: "+casa["metros"];
+				document.getElementById("prop").innerHTML="Propietario: "+casa.propietario["nombre"]+" "+casa.propietario["apellido"];
+			}
+			
+			function comprobarCompra(){
+				if(casa.propietario["nombre"]=="Pepito"){
+					comprarCasa(casa,persona2);
+				}else if(casa.propietario["nombre"]=="Juan"){
+					comprarCasa(casa,persona1);
+				}
+			}
+			
+			function comprarCasa(casa,persona){
+			var precio = casa["precio"], dinero = persona.cuenta["dinero"];
+				if(precio<=dinero){
+					persona.cuenta["dinero"]=dinero-precio;
+					casa.propietario.cuenta["dinero"]+=precio;
+					document.getElementById("resultado").innerHTML="Compra realizada con exito <br/>El propietario "
+					+ casa.propietario["nombre"] + " " + casa.propietario["apellido"] + " vendio la casa a: " + persona["nombre"] + " " + persona["apellido"];
+					casa.propietario=persona;
+				}else{
+					document.getElementById("resultado").innerHTML="El comprador no tiene dinero suficiente.";
+				}
+			}
+		</script>
+	</head>
+	<body> 
+		<script>
+			cuenta1 = {numero:11111, dinero:200000};
+			cuenta2 = {numero:22222, dinero:2200000};
+				
+			persona1 = new Object();
+			persona1.foto="Recursos/p1.jpg";
+			persona1.nombre="Pepito";
+			persona1.apellido="Garcia";
+			persona1.DNI=1111;
+			persona1.cuenta=cuenta1;
+				
+			persona2 = new Object();
+			persona2.foto="Recursos/p2.jpg";
+			persona2.nombre="Juan";
+			persona2.apellido="Vazquez";
+			persona2.DNI=2222;
+			persona2.cuenta=cuenta2;
+				
+			casa = new Object();
+			casa.precio=2000000;
+			casa.direccion="General Martinez Campos";
+			casa.metros=500;
+			casa.foto="Recursos/casa.jpg";
+			casa.propietario=persona1;
+		</script>
+		<header>
+			<h1>Inmobiliaria Pepito & Cia.</h1>
+		</header> 
+		<nav>
+			<p>
+			<a href="#mostrarP">Mostrar Persona</a>
+			<a href="#mostrarC" style='margin-left: 10em'>Mostrar Casa</a>
+			<a href="#comprarC" style='margin-left: 10em'>Comprar Casa</a>
+			</p>
+		</nav>
+		<section>
+			<h2 id="mostrarP">Mostrar Personas</h2>
+			<article>
+				<form>
+					<select id="per">
+						<option value="persona1">Persona1</option>
+						<option value="persona2" selected>Persona2</option>
+					</select>
+					<input type="button" name="botonP" onclick="llamarP()" value="Buscar"></input>
+				</form>
+				<br/><br/>
+				<img id="fot" width="350px" height="350px">
+				<p id="nom"></p>
+				<p id="ape"></p>
+				<p id="dni"></p>
+				<p id="cuent"></p>
+				<p id="cuent2"></p>
+			</article>
+			<h2 id="mostrarC">Mostrar Casas</h2>
+			<article>
+				<input type="button" name="botonC" onclick="mostrarCasa(casa)" value="Mostrar Casas Disponibles"></input>
+				<br/><br/><br/>
+				<img id="fotC" width="500px" height="400px">
+				<p id="prec"></p>
+				<p id="dir"></p>
+				<p id="met"></p>
+				<p id="prop"></p>
+			</article>
+			<h2 id="comprarC">Comprar Casas</h2>
+			<article>
+				<input type="button" name="botonCC" onclick="comprobarCompra()" value="Comprar"></input>
+				<p id="resultado"></p>
+			</article>
+		</section>
+	</body> 
+</html>

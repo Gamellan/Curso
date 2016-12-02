@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="estilo.css"> 
+	</head>
+	<body>
+	<script>
+		var usuarios = [];
+		var usuario;
+		var fAct;
+		var errores = [];
+		var modificador = -1;
+	</script>
+	<header>
+		<h1>Base de datos de usuarios con nombres raros</h1>
+	</header>
+		<form>
+			<p id="info"></p>
+			Nombre: <input type="text" id="nom" required></input><br/>
+			Apellidos: <input type="text" id="ape" required></input><br/>
+			Fecha nacimiento: <input type="date" id="fNac" required></input><br/>
+			Nombre de Usuario: <input type="text" id="nomUsu" required></input><br/>
+			Correo Electronico: <input type="text" id="correoE" required></input><br/>
+			Contraseña: <input type="password" id="pass" required></input><br/>
+			Verificacion contraseña: <input type="password" id="vpass" required></input><br/>
+			<input type="reset" value="Borrar datos" onclick="reinicio()"></input>
+			<input type="button" id="boton" value="Registrar" onclick="registro()"></input>
+		</form>
+		<p id="lista">
+		
+		</p>
+	<script>
+	
+		function registro(){
+			//Recoger los datos introducidos
+			errores = [];
+			var nombre = (document.getElementById("nom").value).trim();			
+			var apellidos = (document.getElementById("ape").value).trim();			
+			var nacimiento = new Date(document.getElementById("fNac").value);			
+			var nomUsuario = document.getElementById("nomUsu").value;			
+			var correo = document.getElementById("correoE").value;
+			var contraseña = document.getElementById("pass").value;
+			var vcontraseña  = document.getElementById("vpass").value;
+			
+			verificar(nombre,apellidos,nacimiento,nomUsuario,correo,contraseña,vcontraseña);
+			
+			if(errores.length == 0){
+			
+				document.getElementById("info").innerHTML = "";
+				usuario = {nombre:nombre, apellidos:apellidos, nacimiento:nacimiento, nUsuario:nomUsuario, correo:correo, contraseña:contraseña};
+				if(modificador == -1){
+					usuarios.push(usuario);
+					document.getElementById("info").innerHTML = "Usuario introducido correctamente.";
+				}else{
+					usuarios[modificador] = usuario;
+					document.getElementById("info").innerHTML = "Usuario modificado correctamente.";
+					reinicio();
+				}
+				mostrar();
+				reiniciarForm();
+				
+			}else{
+			
+				document.getElementById("info").innerHTML = "";
+				var cad ="";
+				for(i=0;i<errores.length;i++){
+					cad+=errores[i] + "<br/>";
+				}
+				document.getElementById("info").innerHTML = cad;
+				
+			}
+		}
+		function mostrar(){
+			//Mostrar los usuarios nuevos creando un <tr> y <td> -->nombreU,nombre,edad,correo<--
+			var cad = "<table><caption><h2>Lista de usuarios registrados</h2></caption><tr><th>Nombre de Usuario</th><th>Nombre</th><th>Edad</th><th>Correo electronico</th><th></th><th></th></tr>";
+			for(i=0;i<usuarios.length;i++){
+				cad+="<tr>";
+				cad+="<td>" + usuarios[i].nUsuario + "</td>";
+				cad+="<td>" + usuarios[i].nombre + "</td>";
+				cad+="<td>" + (fAct.getFullYear() - usuarios[i].nacimiento.getFullYear()) + "</td>";
+				cad+="<td>" + usuarios[i].correo + "</td>";
+				cad+="<td><input type=button value='Eliminar' onclick='eliminar("+i+")'></input></td>";
+				cad+="<td><input type=button value='Modificar' onclick='modificar("+i+")'></input></td>";
+				cad+="</tr>";
+			}
+			cad+="</table>";
+			document.getElementById("lista").innerHTML = cad;
+		}
+		function eliminar(index){
+			//Eliminar el usuario seleccionado
+			usuarios.splice(index, 1);
+			mostrar();
+		}
+		function modificar(index){
+			//Modificar datos del usuario seleccionado
+			document.getElementById("info").innerHTML = "";
+			modificador = index;
+			document.getElementById("boton").value="Modificar";
+			var cad = usuarios[index].nacimiento.getFullYear()+"-"+("0".concat(usuarios[index].nacimiento.getMonth()+1)).slice(-2)+"-"+"0".concat(usuarios[index].nacimiento.getDate()).slice(-2);
+			document.getElementById("nom").value = usuarios[index].nombre;
+			document.getElementById("ape").value = usuarios[index].apellidos;
+			document.getElementById("fNac").value = cad;
+			document.getElementById("nomUsu").value = usuarios[index].nUsuario;
+			document.getElementById("correoE").value = usuarios[index].correo;		
+			document.getElementById("pass").value = usuarios[index].contraseña;
+			document.getElementById("vpass").value = usuarios[index].contraseña;
+			
+		}
+		function isValidEmail(mail){
+			return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
+		}
+		function verificar(nombre,apellidos,nacimiento,nomUsuario,correo,contraseña,vcontraseña){
+		//index se envia para modificar usuario, asi no sale error con el nombre de usuario y contraseña.
+			if(nombre.length <= 2){
+				errores.push("*El nombre debe tener más de 2 caracteres.");
+			}
+			if(apellidos.length <= 2){
+				errores.push("*El apellido debe tener más de 2 caracteres.");
+			}
+			fAct = new Date();
+			if((fAct.getFullYear() - nacimiento.getFullYear()) < 18){
+				errores.push("*Debes ser mayor de edad para registrarte como usuario.");
+			}
+			if(nacimiento == "Invalid Date"){
+				errores.push("*Debes introducir una fecha.");
+			}
+			if(nomUsuario.length <= 2){
+				errores.push("*El nombre de usuario debe tener más de 2 caracteres.");
+			}
+			for (i=0;i < usuarios.length; i++){
+				if(usuarios[i].nUsuario == nomUsuario){
+					if(i!=modificador){
+						errores.push("*Ese nombre de usuario ya esta registrado.");
+					}
+				}
+			}
+			for (i=0;i < usuarios.length; i++){
+				if(usuarios[i].correo == correo && modificador == -1){
+					if(i!=modificador){
+						errores.push("*Ese correo ya esta siendo utilizado.");
+					}
+				}
+			}
+			if(!isValidEmail(correo)){
+				errores.push("*El formato del email no es correcto.");
+			}
+			if(contraseña.length < 6){
+				errores.push("*La contraseña debe tener al menos 6 carácteres.");
+			}
+			if(contraseña!=vcontraseña){
+				errores.push("*Las contraseñas no coinciden.");
+			}
+			
+		}
+		function reiniciarForm(){
+			
+			document.getElementById("nom").value = "";			
+			document.getElementById("ape").value = "";			
+			document.getElementById("fNac").value = "";			
+			document.getElementById("nomUsu").value = "";			
+			document.getElementById("correoE").value = "";
+			document.getElementById("pass").value = "";
+			document.getElementById("vpass").value = "";
+			
+		}
+		function reinicio(){
+			modificador = -1;
+			document.getElementById("boton").value="Registrar";
+		}
+	</script>
+	</body>
+</html>

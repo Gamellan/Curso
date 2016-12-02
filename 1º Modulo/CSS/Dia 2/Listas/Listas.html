@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Listas</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="" type="text/css">
+		<style>
+			.disco{list-style:disc}
+			ol{list-style:upper-roman}
+			li:before{
+				content: "* ";
+				padding-right: 8px;
+			}
+		</style>
+	</head>
+	<body>
+	
+		<p>Lista Desordenada</p><br>
+		<ul class="disco">
+			<li>1</li>
+			<li>2
+				<ul type="square">
+					<li>2.1</li>
+					<li>2.2</li>
+				</ul>
+			</li>
+			<li>3
+				<ul type="none">
+					<li>3.1</li>
+					<li>3.2</li>
+				</ul>
+			</li>
+			<li>4
+				<ul type="circle">
+					<li>4.1</li>
+					<li>4.2</li>
+				</ul>
+			</li>
+			<li>5</li>
+			<li>6</li>
+		</ul>
+		<p>Lista Ordenada</p><br>
+		<ol type="A">
+			<li>ag</li>
+			<li>aaerh</li>
+			<li>ahrth
+				<ol>
+					<li>arha</li>
+					<li>srth</li>
+					<li>saerg</li>
+				</ol>
+			</li>
+			<li>arjrj</li>
+			<li>rtjg</li>
+			<li>artj</li>
+		</ol>
+
+	</body>
+	</html>

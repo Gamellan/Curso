@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>MULTIMEDIA</title> 
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/estilos.css">
+	<script type="text/javascript" src="js/multimedia.js"></script>
+</head>
+<body>
+	<main>
+		<aside>
+			<div id="logo"> <img src="imagenes/logo.gif" width="150px" height="150px"> </div>
+			<ul >
+				<li>
+					<a href="delegados.html"><img src="imagenes/icono_usuario.png" /> Usuarios</a>
+				</li>
+				<li>
+					<a href="noticias.html"><img src="imagenes/icono_noticia.png" /> Noticias</a>
+				</li>
+				<li>
+					<a href="documentos.html"><img src="imagenes/icono_documento.png" /> Documentos</a>
+				</li>
+				<li>
+					<a href="eventos.html"><img src="imagenes/icono_evento.png" /> Eventos</a>
+				</li>
+				<li>
+					<a href="multimedia.html"><img src="imagenes/icono_multimedia.png" /> Multimedia</a>
+				</li>
+			</ul>
+		</aside>
+			<section>
+				<div id="encabezado">
+					<h1>Multimedia</h1>
+				</div><br/>
+				<details id="nuevo"open>
+					<summary>CREAR ÁLBUM</summary></br>
+					<form ENCTYPE="multipart/form-data" name="formulario" method="post" action="nuevoMultimedia.php">
+						</br><h2>Nuevo álbum:</h2></br>
+						<table id="formularioAlbum">
+							<tr>
+								<td id="titulo">Título:</td>
+								<td><input type="text" name="titulo" required /></td>
+							</tr>
+							<tr>
+								<td>Tipo de contenido:</td>
+								<td>
+									<input type="radio" id="tipo" onchange="habilitarTipo();" value="Imágenes" name="tipo" selected/> Imágenes
+									<input type="radio" id="tipo" onchange="habilitarTipo();"value="Vídeos" name="tipo"/> Vídeos
+								</td>
+							</tr>
+						</table>
+						<div id="archivos">
+							<h2>Archivos adjuntos:</h2>
+							<p id="files"></p>
+						</div>
+						<br/>
+						<div id="formularioImagen">
+							<h2>Nueva imagen:</h2>
+							<table>
+								<tr>
+									<td>Texto descriptivo: </td>
+									<td><input type='text' name='textImagen' size='30'></td>
+								</tr>
+								<tr>
+									<td  id="imagen00">Adjuntar archivo: </td>
+									<td><input id="imagen0" name='imagen' type='file'></td>
+									<tr id="labelImagenes0"></tr>
+								</tr>
+								<tr>
+								</tr>
+							</table>
+							<div>
+								<button type="button" onclick="aniadirImagen()" id="adjuntarImagen"><img src="./imagenes/icono_agregar.png"/> Adjuntar</button>
+							</div>
+						</div></br>
+						<div id="formularioVideo">
+							<h2>Nuevo vídeo:</h2>
+							<table>
+								<tr>
+									<td>Texto descriptivo: </td>
+									<td><input type='text' name='textVideo' size='30'></td>
+								</tr>
+								<tr>
+									<td id="urlVideo00">Introducir url: </td>
+									<td><input id="urlVideo0" name='urlVideo' type='text' size='30'></td>
+									<tr id="labelVideos"></tr>
+								</tr>
+							</table>
+							<input type="number" id="numeroImagenes" name="numeroImagenes">
+							<input type="number" id="numeroVideos" name="numeroVideos">
+							<div>
+								<button type="button" onclick="aniadirVideo()" id="adjuntarVideo"><img src="./imagenes/icono_agregar.png"/> Adjuntar</button>
+							</div>
+						</div><br/>
+						<div>
+							<button type="submit"><img src="./imagenes/icono_agregar.png"/> Agregar</button>
+						</div></br>
+					</form><br/>
+					
+					
+				</details>
+				</br>
+				<details id="listadoImagenes">
+					<summary>LISTADO DE ÁLBUMES (IMÁGENES)</summary></br>
+					<table id="albumesImg">
+						<tr>
+							<th colspan="6">Álbum: Congreso CCOO</th>
+						</tr>
+						<tr>
+							<td id="imgAlbum" valign="top">
+								<img src="./imagenes/evento1.jpg"/></br></br>
+								Congreso CCOO</br>
+								<i>Modificado: 11/11/2016</i></br></br>
+							</td>
+							<td id="imgAlbum" valign="top">
+								<img src="./imagenes/evento1.jpg"/></br></br>
+								Congreso CCOO</br>
+								<i>Modificado: 11/11/2016</i></br></br>
+							</td>
+							<td id="imgAlbum" valign="top">
+								<img src="./imagenes/evento1.jpg"/></br></br>
+								Congreso CCOO</br>
+								<i>Modificado: 11/11/2016</i></br></br>
+							</td>
+							<td id="imgAlbum" valign="top">
+								<img src="./imagenes/evento1.jpg"/></br></br>
+								Congreso CCOO</br>
+								<i>Modificado: 11/11/2016</i></br></br>
+							</td>
+						</tr>
+					</table>
+					<div id="botones">
+						<button id="modificar" title="Modificar"><img src="./imagenes/icono_modificar.png" width="18px" height="18px"></button></br>
+						<button id="eliminar" title="Eliminar"><img src="./imagenes/icono_eliminar.png" width="18px" height="18px"></button>			
+					</div>
+					<div style="clear:left"></br></div>
+				</details>
+				</br>
+				<details id="listadoVideos">
+					<summary>LISTADO DE ÁLBUMES (VÍDEOS)</summary></br>
+					<table id="albumesVid">
+						<tr>
+							<th colspan="4">Álbum: Congreso CCOO</th>
+						</tr>
+						<tr>
+							<td id="imgAlbum" valign="top">
+								<img src="./imagenes/evento1.jpg"/></br></br>
+								Congreso CCOO</br>
+								<i>Modificado: 11/11/2016</i></br></br>
+							</td>
+							<td id="imgAlbum" valign="top">
+								<img src="./imagenes/evento1.jpg"/></br></br>
+								Congreso CCOO</br>
+								<i>Modificado: 11/11/2016</i></br></br>
+							</td>
+							<td id="imgAlbum" valign="top">
+								<img src="./imagenes/evento1.jpg"/></br></br>
+								Congreso CCOO</br>
+								<i>Modificado: 11/11/2016</i></br></br>
+							</td>
+							<td id="imgAlbum" valign="top">
+								<img src="./imagenes/evento1.jpg"/></br></br>
+								Congreso CCOO</br>
+								<i>Modificado: 11/11/2016</i></br></br>
+							</td>
+						</tr>
+					</table>
+					<div id="botones">
+						<button id="modificar" title="Modificar"><img src="./imagenes/icono_modificar.png" width="18px" height="18px"></button></br>
+						<button id="eliminar" title="Eliminar"><img src="./imagenes/icono_eliminar.png" width="18px" height="18px"></button>			
+					</div>
+					<div style="clear:left"></br></div>
+				</details>
+				
+				
+			</section>
+		</main>
+		<script>
+			var tipo = 0;
+			var indice = 1;
+			var textArchivos = "";
+			var imagenes=0;
+			var videos=0;
+					
+			function aniadirImagen(){
+			
+				document.getElementById("imagen"+imagenes).style.visibility = "hidden";
+				document.getElementById("imagen"+imagenes+","+imagenes).style.visibility = "hidden";
+				var label = document.getElementById("labelImagenes"+imagenes);
+				imagenes++;
+				var cadena = "<tr id='labelImagenes"+imagenes'><td id='"imagen"+imagenes+","+imagenes+"'>Adjuntar archivo: </td><td><input id='imagen"+ imagenes +"' name='imagen"+ imagenes +"' type='file'></td>";
+				label.innerHTML = cadena;
+				document.getElementById("numeroImagenes").value = imagenes;
+			
+			}
+			function aniadirVideo(){
+				
+				document.getElementById("imagen"+videos).style.visibility = "hidden";
+				document.getElementById("urlVideo"+videos+","+videos).style.visibility = "hidden";
+				var label = document.getElementById("labelVideos"+videos)
+				videos++;
+				var cadena = "<tr id='labelVideos"+videos'><td id='"urlVideo"+videos+","+videos"'>Introducir url: </td><td><input id='urlVideo"+videos+"' name='urlVideo"+videos+"' type='text' size='30'></td></tr>";
+				label.innerHTML = cadena;
+				document.getElementById("numeroVideos").value = videos;
+				
+			}
+			
+			function habilitarTipo(){
+				var elementoSeleccionado =  document.getElementsByName("tipo");
+				if(elementoSeleccionado[0].checked){
+					document.getElementById('adjuntarImagen').disabled = "false";
+					document.getElementById('adjuntarImagen').style.cursor = "pointer";
+					document.getElementById('adjuntarImagen').style.backgroundColor = "#4D8ECB";
+					document.getElementById('adjuntarImagen').onmouseover = function() {
+						this.style.transform = "scale(1.05,1.05)";
+					}
+					
+					document.getElementById('adjuntarVideo').disabled = "true";
+					document.getElementById('adjuntarVideo').style.cursor = "none";
+					document.getElementById('adjuntarVideo').style.backgroundColor = "grey";
+					document.getElementById('adjuntarVideo').style.transform = "none";
+					document.getElementById("files").innerHTML = "Imagen: imagen1.jpg";
+					tipo=0;
+				}else if(elementoSeleccionado[1].checked){
+					document.getElementById('adjuntarVideo').disabled = "false";
+					document.getElementById('adjuntarVideo').style.cursor = "pointer";
+					document.getElementById('adjuntarVideo').style.backgroundColor = "#4D8ECB";
+					document.getElementById('adjuntarVideo').onmouseover = function() {
+						this.style.transform = "scale(1.05,1.05)";
+					}
+					
+					document.getElementById('adjuntarImagen').disabled = "true";
+					document.getElementById('adjuntarImagen').style.cursor = "none";
+					document.getElementById('adjuntarImagen').style.backgroundColor = "grey";
+					document.getElementById('adjuntarImagen').style.transform = "none";
+					document.getElementById("files").innerHTML = "Video: video1.mp4";
+					tipo=1;
+				}
+				
+			}
+			
+			function habilitarArchivo(){
+				document.getElementById("adjuntar").style.visibility  = "visible";
+				document.getElementById("introducir").style.visibility   = "hidden";
+			}
+			
+			function habilitarURL(){
+				document.getElementById("introducir").style.visibility  = "visible";
+				document.getElementById("adjuntar").style.visibility  = "hidden";
+			}
+			
+			function limpiarArchivos(){
+				document.getElementById("files").innerHTML = "sfs";
+			}
+		</script>
+	</body>
+	
+	
+</html>

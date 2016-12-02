@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>NOTICIAS</title>
+    <link rel="stylesheet" href="css/estilos.css"> 
+</head>
+
+<body>
+    <main>
+        <aside>
+            <div id="logo"> <img src="imagenes/logo.gif" width="150px" height="150px"> </div>
+            <ul>
+                <li>
+                    <a href="delegados.html"><img src="imagenes/icono_usuario.png" /> Usuarios</a>
+                </li>
+                <li>
+                    <a href="noticias.html"><img src="imagenes/icono_noticia.png" /> Noticias</a>
+                </li>
+                <li>
+                    <a href="documentos.html"><img src="imagenes/icono_documento.png" /> Documentos</a>
+                </li>
+                <li>
+                    <a href="eventos.html"><img src="imagenes/icono_evento.png" /> Eventos</a>
+                </li>
+                <li>
+                    <a href="multimedia.html"><img src="imagenes/icono_multimedia.png" /> Multimedia</a>
+                </li>
+            </ul>
+        </aside>
+    </main>
+    <section>
+        <div id="encabezado">
+            <h1>NOTICIAS</h1> </div>
+        <br>
+        <details id="nuevo" open>
+           <summary>CREAR NOTICIA</summary>
+            <br>
+            <form ENCTYPE="multipart/form-data" name="formu_noticias" method="POST" action="nuevaNoticia.php">
+                <br>
+                <h2>Nueva Noticia:</h2>
+                <br>
+                <table id="formularioNoticia">
+                    <tr>
+                        <td>TITULO:</td>
+                        <td>
+                            <input name="titulo" type="text" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>SUBTITULO</td>
+                        <td>
+                            <input type="text" name="subtitulo" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CUERPO:</td>
+                        <td>
+                            <textarea name="cuerpo" id="cuerpo" cols="70" rows="15" required></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>IMAGEN:</td>
+                        <td>
+                            <input type="file" name="imagen" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" value="Registrar" ><img src="./imagenes/icono_agregar.png"/>Añadir</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </details>
+        <details id="listadoNoticias">
+            <summary>LISTADO DE NOTICIAS</summary>
+            <br>
+            <table id="listaNoticia">
+                <tr>
+                    <td id="noticia"> <h2>Noticia</h2>
+                        <br><h3>Subtitulo</h3>
+                        <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium lorem id augue ullamcorper aliquam. Cras justo leo, faucibus aliquet venenatis mattis, egestas vel massa. Morbi sodales venenatis porttitor. Quisque et pharetra arcu. Etiam diam purus, imperdiet eget elit non, hendrerit rhoncus leo. Vivamus mi enim, congue quis enim nec, semper sollicitudin nunc. Donec molestie ante  amet lorem. </td>
+                </tr>
+            
+            </table>
+            <div id="botones">
+                <button id="modificar" title="Modificar"><img src="imagenes/icono_modificar.png" width="18px" height="18px"></button>
+                <br>
+                <button id="eliminar"><img src="imagenes/icono_eliminar.png" width="18px" height="18px"></button>
+            </div>
+        </details>
+    </section>
+</body>
+</html>

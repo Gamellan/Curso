@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="estiloInicio.css">
+	</head>
+	<body>
+		
+		<div>
+			<div id="container" align="center"><a id="girando" href="Practica.html">HERRAMIENTA POMODORO</a></div>
+			<img id="imagen"/>
+			<img id="imagen2"/>
+		</div>
+		
+	<script>
+		var enlace = document.getElementById("girando");
+		enlace.style.display = "none";
+		
+		var img = document.getElementById("imagen");
+		var img2 = document.getElementById("imagen2");
+		
+		var posicion = 0;
+		var left = 600;
+		
+		img.src="Recursos/pajaroArriba.png";
+		img2.src="Recursos/pajaro2Arriba.png";
+		
+		var intervaloCambio = setInterval(aleteo,250);
+		var intervalo = setInterval(avanza,5);
+		
+		function avanza(){
+			left--;
+			if(left>=0){
+				img.style.left = left + "px";
+			}
+			img2.style.left = left + "px";
+			if(left==0){
+				img.src="Recursos/pajaroPosado.png";
+				enlace.style.display = "block";
+			}
+			if(left==-300){
+				img2.style.display = "none";
+				clearInterval(intervalo);
+				clearInterval(intervaloCambio);
+			}
+		}
+		
+		function aleteo(){
+			if(posicion!=0){
+				if(left>=0){
+					img.src="Recursos/pajaroAbajo.png";
+				}
+				img2.src="Recursos/pajaro2Abajo.png";
+				posicion=0;
+			}else{
+				if(left>=0){
+					img.src="Recursos/pajaroArriba.png";
+				}
+				img2.src="Recursos/pajaro2Arriba.png";
+				posicion=1;
+			}
+		}
+		
+	</script>
+	</body>
+</html>

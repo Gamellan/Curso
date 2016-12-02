@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+
+<script>
+var piezas = ["Tornillos", "Engranajes"];
+var partes = ["Chasis", "Llantas"];
+document.write(piezas.concat(partes)+ "<br/>");
+document.write("Los tornillos estan en la posicion: " + piezas.indexOf("Tornillos")+ "<br/>");
+cad = piezas.join();
+document.write(cad+ "<br/>");
+document.write(partes.lastIndexOf("Chasis")+ "<br/>");
+document.write(partes.pop()+ "<br/>");
+document.write(partes.push("Motor") + "<br/>");
+document.write(partes.reverse() + "<br/>");
+document.write(piezas.shift() + "<br/>");
+document.write(partes.slice(1) + "<br/>");
+document.write(partes.sort() + "<br/>");
+document.write(partes.splice("Caja de cambios") + "<br/>");
+document.write(piezas.toString() + "<br/>");
+document.write(partes.unshift("Frenos") + "<br/>");
+document.write(partes.valueOf(2) + "<br/>");
+</script>
+
+</body>
+</html>

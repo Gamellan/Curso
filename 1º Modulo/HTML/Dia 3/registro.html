@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Página de registro</title>
+			<meta charset="UTF-8">
+			<link rel="stylesheet" href="estilo.css" type="text/css">
+		</head>
+		<body> 
+			<main>
+				<header id="head"><h1>Página de registro</h1></header>
+				<nav>
+					<ul>
+						<li><a href="Periodico1.html">Galeria de las curiosidades</a></li>
+						<li><a href="Periodico2.html">Politica en España</a></li>
+						<li><a href="Periodico3.html">El rincon del Otaku</a></li>
+					</ul>
+				</nav>
+				<aside id="lateral">
+					<ul type="disc">
+						<li><a href="#n1">Datos personales</a></li></br>
+						<li><a href="#n2">Fecha de nacimiento</a></li></br>
+						<li><a href="#head">Volver arriba</a></li><br/>
+					</ul>
+				</aside>
+				<section>
+					<form>
+						<article id="n1">
+							<h1><b>Datos Personales</b></h1><br/><br/>
+							Nombre: <input type="text" name="nombre" required></input>
+							Apellidos: <input type="text" name="apellidos" required></input><br/><br/>
+							E-mail: <input type="email" name="email" required></input><br/><br/>
+							Contraseña: <input type="password" name="contraseña" required></input>
+							Contraseña: <input type="password" name="contraseña2" required></input><br/><br/>
+							<input type="checkbox" name="visible" value="Si" checked> ¿Quieres que tus datos personales sean visibles? <br/> 
+						</article>
+						<article id="n2">
+							<h1><b>Fecha de Nacimiento</b></h1><br/><br/><br/>
+							Fecha: <input type="date" name="fecha"></input><br/><br/>
+							<h2>Sexo:</h2><br/><br/>	
+							<input type="radio" name="sex" value="Hombre">Hombre</input>
+							<input type="radio" name="sex" value="Mujer">Mujer</input><br/><br/><br/>
+							<input type="submit" value="  Registrarse  ">
+							<input type="reset" value="  Borrar datos  ">
+						</article>
+					</form>
+				</section>
+				<footer>Página creada por Antonio Regidor Ballesteros © Copyright 2016</footer>
+			</main>
+		</body>
+	</html>

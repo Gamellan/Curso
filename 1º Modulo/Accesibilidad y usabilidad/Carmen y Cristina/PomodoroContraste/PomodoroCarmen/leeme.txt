@@ -1,0 +1,4 @@
+Archivo "InicioPomodoro.html" constituye la página de inicio en la cual se encuentra la animación y a través de la cual se accede
+a la página principal de Pomodoro ("Pomodor.html")
+Para que una interrupción sea registrada debe haberse iniciado una tarea
+Para iniciar una interrupción se pulsa el boton disruption en color rojo, y para detener la interrupción se vuelve a pulsar el botón start

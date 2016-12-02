@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title>Pagina Pomodoro</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="estilosPomodoro.css">
+		<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+		
+	<body>
+		
+		<header id="cabecera">
+			<nav>
+				<ul>
+					<li><a href="#settings">Settings</a></li>
+					<li><a href="#tasks">Tasks</a></li>
+					<li><a href="#timer">Timer</a></li>
+					<li><a href="#disruption">Disruptions</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id ="cabecera" class="seccion">
+			<h1> Welcome to your Pomodoro Timer</h2>
+			<h2>And get your effort worth it</h3>
+			<a href="#settings">
+				<img border="0" alt="W3Schools" src="flechaAbajo.png" width="200" height="200">
+			</a>
+		</div>
+		<div id="settings" class="seccion">
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			</br>
+			<h4>Define your settings and customize your Pomodoro timer. The default values ​​are:</br>
+			Pomodoro: 25 min, Break: 5 min, Long Break: 15 min</h4>
+			<form>
+				<label for="sonido" title="End time sound">Alarm sound: </label></br>
+				<select id="sonido" onchange="valueAudio()">
+					<option value="Alarma1_bip.mp3">Chinese gong</option>
+					<option value="Alarma2_rooster.mp3">Rooster</option>
+					<option value="Alarma3_text.mp3">Soft Alarm</option>
+				</select></br></br>
+				<label for="tiempoPomodoro" title="Length of the period of work">Pomodoro time: </label></br>
+				<input type="number" id="tiempoPomodoro"></br></br>
+				<label for="tiempoBreakCorto" title="Length of the short break, between 2 Pomodoros">Break time: </label></br>
+				<input type="number" id="tiempoBreakCorto"></br></br>
+				<label for="tiempoBreakLargo" title="Length of the long break, every three Pomodoros">Long break time: </label></br>
+				<input type="number" id="tiempoBreakLargo">
+			</form>
+			<a href="#tasks">
+				<img border="0" alt="W3Schools" src="flechaAbajo.png" width="100" height="100">
+			</a>
+		</div>
+		<div id="tasks" class="seccion">
+			</br>
+			</br>
+			</br>
+			</br>
+			
+			<h4>Define a Task</h4>
+			
+			</br>
+			<form>
+				<label for="nombreTarea" title="Name of the Task">Task Name: </label></br>
+				<input type="text" id="nombreTarea"></br></br>
+				<label for="numeroPomodorosEst" title="Estimated number of Pomorodo periods">Estimated Pomodoros: </label></br>
+				<input type="number" id="numeroPomodorosEst"></br></br>
+				<button type="button" id="crearTarea" onclick="crearTask()">Crear Tarea</button>
+			</form>
+			
+			<h4>Created Tasks</h4>
+			<table id="tablaTareas">
+			  <tr>
+				<th>Task Name</th>
+				<th>Pomodoros Estimated </th>
+				<th>Finished</th>
+				<th>Pomodoros Spent</th>
+				<th>Disruptions</th>
+				<th>Total Lost Time<th>
+			  </tr>			  
+			</table>
+			<a href="#timer">
+				<img border="0" alt="W3Schools" src="flechaAbajo.png" width="100" height="100">
+			</a>
+		</div>
+		<div id="timer" class="seccion">
+		    </br>
+			</br>
+			</br>
+			</br>
+			
+			<button type="button" id="pomodoro" onclick="iniciarPomodoro()">Pomodoro</button>
+			<button type="button" id="break" onclick="iniciarBreak()">Break</button>
+			<button type="button" id="longBreak" onclick="iniciarLongBreak()">Long Break</button>
+			</br>
+			</br>
+			
+			<select id="startTarea" onchange="seleccTask()">
+					<option value="Alarma1_bip.mp3">Select a task</option>				
+			</select>
+			</br>
+			<div id="temporizador">
+				<p id="tiempo">00:00</p>
+			</div>
+			
+			<button type="button" id="iniciar" onclick="cuentaAtras(time, seconds)">Start</button>
+			<button type="button" id="parar" onclick="pauseTime()">Pause</button>
+			<button type="button" id="cancelar" onclick="resetTime()">Reset</button>
+			</br>
+			<button type="button" id="interupcion" onclick="interrupcionFuncion(), mostrarCronoInterrupciones()">Disruption</button>
+			<div id="cronoInterrupciones">
+				<form>				
+					<label for="nombreInterrupcion" title="Length of the period of work">Disruption Name: </label></br>
+					<input type="text" id="nombreInterrupcion"></br>				
+				</form>
+				<div id="cronometroInterupcion">
+					<p id="cronoInterrupcion">00:00</p>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		<div id="disruption" class="seccion">
+			<h4>Disruption registered</h4>
+			<table id="tablaInterrupciones">
+			  <tr>
+				<th>Disruption Name</th>
+				<th>Task broken </th>
+				<th>Duration</th>
+			  </tr>			  
+			</table>
+			
+			</br>
+			<h4>Total Lost time:</h4>
+			<p id="totalTiempoPerdido"></p></br></br></br></br>
+			<a href="#timer">
+		</div>
+		
+		<audio id="audio1">
+		   <source src="Alarma1_bip.mp3" type="audio/mpeg">
+		  Your browser does not support the audio element.
+		</audio>
+		<audio id="audio2">
+		   <source src="Alarma2_rooster.mp3" type="audio/mpeg">
+		  Your browser does not support the audio element.
+		</audio>
+		<audio id="audio3">
+		   <source src="Alarma3_text.mp3" type="audio/mpeg">
+		  Your browser does not support the audio element.
+		</audio>
+		
+		
+		<script>
+		//Variables globales
+		var time = 25
+		var seconds = 0;
+		var interval;
+		var arrayPR = [];
+		var tiempoInicio = 25;
+		var arrayTareas = []
+		var tarea;
+		var i = 0;
+		var numeroTiempos = [];
+		var tareaSelec;
+		var indiceTarea;
+		var tipoTiempo = 0 //0: esta corriendo un Pomodoro; 1: está corriendo un break corto; 2: está corriendo un break largo
+		var tareaFinalizar; //tarea que se va a registrar como finalizada
+		var indexTarea; // indice de la tarea que se va a registrar como finalizada ("tareaFinalizar")
+		var minInterrupcion = 0 //variable donde se recogen los minutos de una interrupcion
+		var secInterrupcion = 0	//variable donde se recogen los segundos de una interrupcion
+		var interrupcionTF = 0 //variable para determinar si se encuentra el tiempo en un periodo de interrupcion a la hora de volver a inciar el tiempo de trabajo("Start")
+		var interrupcion; //variable que sirve para crear la interrupcion antes de ser registrada
+		var tiempoParado; //variable que almacena el tiempo cada vez que este es parado por el boton "Pause" o porque se registra una interrupcio
+		var tiempoInterrupcion; //variable donde se almacena el tiempo que ha durado una interrupcion
+		var arrayInterrupciones = []; /*array donde se almacenan todas las interrupcions. Cada interrupcion es almacenada en este array y en el array de tareas, 
+		                                ya que se almacena tambien como una propiedad de cada uno de los objetos tarea*/
+										
+		//Se crea una función para establecer la variable "time" en 25 min o la introducida por el usuario si se pincha en botón "Pomodoro"
+			function iniciarPomodoro(){
+				var tiempoIntroducirdo = document.getElementById("tiempoPomodoro").value;
+				clearInterval(interval);
+				tipoTiempo = 0;
+				if (tiempoIntroducirdo ===""){
+					time = 25;
+					tiempoInicio = 25;
+					seconds = 0;
+				}
+				else{
+					time = tiempoIntroducirdo;
+					tiempoInicio = tiempoIntroducirdo;
+					seconds = 0;
+				}
+				if (time.toString().length > 1){
+					document.getElementById("tiempo").innerHTML = time + ":00"
+				}
+				else{
+					document.getElementById("tiempo").innerHTML = "0" + time + ":00"
+				}
+			}
+		
+		//Se crea una función para establecer la variable "time" en 5 min o la introducida por el usuario si se pincha en botón "Break"
+			function iniciarBreak(){
+				var tiempoIntroducirdo = document.getElementById("tiempoBreakCorto").value;
+				clearInterval(interval);
+				tipoTiempo = 1;
+				if (tiempoIntroducirdo ===""){
+					time = 5;
+					tiempoInicio = 5;
+					seconds = 0;
+				}
+				else{
+					time = tiempoIntroducirdo;
+					tiempoInicio = tiempoIntroducirdo;
+					seconds = 0;
+				}
+				document.getElementById("tiempo").innerHTML = "0" +time + ":00";
+				
+			}
+		
+		//Se crea una función para establecer la variable "time" en 15 min o la introducida por el usuario si se pincha en botón "Long Break"
+			function iniciarLongBreak(){
+				var tiempoIntroducirdo = document.getElementById("tiempoBreakLargo").value;
+				clearInterval(interval);
+				tipoTiempo = 2;
+				if (tiempoIntroducirdo ===""){
+					time = 15;
+					tiempoInicio = 15;
+					seconds = 0;
+				}
+				else{
+					time = tiempoIntroducirdo;
+					tiempoInicio = tiempoIntroducirdo;
+					seconds = 0;
+				}
+				if (time.toString().length > 1){
+					document.getElementById("tiempo").innerHTML = time + ":00"
+				}
+				else{
+					document.getElementById("tiempo").innerHTML = "0" + time + ":00"
+				}
+			}
+		//Se crea una función que inicie el tiempo
+			function cuentaAtras(m, s){
+				if (interrupcionTF === 0){ //Se va a iniciar el tiempo, bien sea desde 0, sin haberse registrado una interrupcion
+					arrayPR = [];
+					clearInterval(interval);
+					interval = setInterval(function(){
+						if(s > 0) { s--; }
+						else
+						{
+							if (m > 0)
+							{
+								m--;
+								s = 59;
+							}
+							else
+							{
+								clearInterval(interval);
+								playAudio();
+								agregarPomodoro();
+							}
+						}
+						showTime(m,s);
+						
+						//document.getElementById("tiempo").innerHTML = m + ":"+ s;
+						
+					},150);
+				}
+				else{                                       /*interrupcionTF está en true, por lo que además de reiniciarse el tiempo, 
+				                                              se registra la interrupción en la que se encontraba el usuario*/ interrupcion
+					clearInterval(intervalCronometro);
+					clearInterval(interval);
+					registrarInterrupcion();
+					interval = setInterval(function(){
+						if(s > 0) { s--; }
+						else
+						{
+							if (m > 0)
+							{
+								m--;
+								s = 59;
+							}
+							else
+							{
+								clearInterval(interval);
+								playAudio();
+								agregarPomodoro();
+							}
+						}
+						showTime(m,s);
+						document.getElementById("cronoInterrupciones").style.visibility = "hidden";
+						//document.getElementById("tiempo").innerHTML = m + ":"+ s;
+						
+					},150);
+				}
+				
+			}
+		//Se crea una función que muestre el tiempo
+			function showTime(min,seg){
+				mStr = min.toString();
+				sStr = seg.toString();
+				lenMin = mStr.length;
+				lenSeg = sStr.length;
+				/*console.log ("mStr:" + mStr);
+				console.log ("sStr:" + sStr);
+				console.log ("lenMin:" + lenMin);
+				console.log ("lenSeg:" + lenSeg);*/
+				
+				if (lenMin == 2 && lenSeg == 2){
+					document.getElementById("tiempo").innerHTML = min + ":"+ seg;					
+				}
+				else if (lenMin == 2 && lenSeg == 1){
+					document.getElementById("tiempo").innerHTML = min + ":0"+ seg;
+				}
+				else if (lenMin == 1 && lenSeg == 1){
+					document.getElementById("tiempo").innerHTML = "0" + min + ":0"+ seg;
+				}
+				else if (lenMin == 1 && (lenSeg == 2 || seg === 0) ){
+					document.getElementById("tiempo").innerHTML = "0" + min + ":"+ seg;
+				}
+			}
+		//Se crea una función que pause el tiempo y que no pueda iniciarse si el tiempo está en reset
+			function pauseTime(){				
+				clearInterval(interval);
+				tiempoParado = document.getElementById("tiempo").innerHTML				
+				time = tiempoParado.slice(0,2);				
+				seconds = tiempoParado.slice(3);
+				arrayPR.push(1);			
+				
+			}
+			
+		// Se crea una función que resetee el timepo y que no pueda iniciarse si el tiempo está en pausa
+			function resetTime(){	
+					clearInterval(interval);
+					console.log(time);
+					seconds = 0;
+					time = tiempoInicio;
+					//document.getElementById("tiempo").innerHTML = tiempoInicio + ":00"
+					showTime(tiempoInicio,seconds);
+					arrayPR.push(2);				
+				
+			}
+		
+		//Se crea una función que recoge la opccion del audio seleccionado
+			var audio = document.getElementById("audio1");
+			
+			var audioSelect = document.getElementById("sonido");
+			function valueAudio(){
+				console.log(audioSelect);
+				if (audioSelect.selectedIndex === 0){
+					audio = document.getElementById("audio1");
+					console.log("entra en el 1º")
+				}
+				else if (audioSelect.selectedIndex === 1){
+					audio = document.getElementById("audio2");
+					console.log("entra en el 2º")
+				}
+				else if (audioSelect.selectedIndex === 2){
+					audio = document.getElementById("audio3");
+					console.log("entra en el 3º")
+				}
+			}
+		//Se crea una función que hace sonar una alerta cuando finaliza el tiempo
+			function playAudio() {
+			console.log(audio);
+				document.getElementsByTagName("source")[0].src = ""
+				audio.play();
+			}
+		
+		//Se crea una función para crear tareas que recoje los datos que ha rellenado el usuario.
+			function crearTask(){
+				tarea = new Object;
+				tarea.iden = i+1;
+				tarea.nombre = document.getElementById("nombreTarea").value;
+				tarea.pomodorosEstimados = document.getElementById("numeroPomodorosEst").value;
+				tarea.finalizada = "No";
+				tarea.pomodorosUsados = 0;
+				tarea.interrupciones = [];
+				tarea.tiempoPerdido = "No disruptions"//return de la funcion que se creará para sumar los tiempos del array de interrupciones de esta tarea
+				arrayTareas.push(tarea);
+				mostrarTareasBucle();
+				tareaAopciones(arrayTareas[arrayTareas.length - 1], arrayTareas.length - 1);
+				console.log(tarea);
+				console.log(arrayTareas);
+				i++;
+			}
+			
+		/*Se crea una función que asigne el número de pomodoros usados para realizar una tarea
+			function pomodorosUsado(){
+				var numeroPomodoros;
+				if (tarea.finalizada === "No"){
+					numeroPomodoros = 0;
+				}
+				else if (tarea.finalizada === "No"){
+					numeroPomodoros = 1;
+				}
+				
+				return numeroPomodoros;
+			}*/
+		
+		
+			
+			//Se añade un row a la tabla de interrupciones por cada elemento del arra "arrayInterrupciones"
+			function mostrarTareasBucle(){
+				var table = document.getElementById("tablaTareas");
+				
+					
+					while(table.rows.length > 1) {
+						table.deleteRow(1);
+					}
+					
+				
+				for(j = 0; j < arrayTareas.length; j++){
+					var row = table.insertRow(-1);	
+					
+					var cellNombre = row.insertCell(0);
+					var cellPomodorosEst = row.insertCell(1);
+					var cellTerminado = row.insertCell(2);
+					var cellPomodorosUsa = row.insertCell(3);
+					var cellInterrupciones = row.insertCell(4);
+					var cellTiempoPerd = row.insertCell(5);
+					var cellInd = row.insertCell(6);
+					
+					
+					cellNombre.innerHTML = arrayTareas[j].nombre;
+					cellPomodorosEst.innerHTML = arrayTareas[j].pomodorosEstimados;
+					cellTerminado.innerHTML =  arrayTareas[j].finalizada;
+					cellPomodorosUsa.innerHTML = arrayTareas[j].pomodorosUsados;	
+					cellInterrupciones.innerHTML = arrayTareas[j].interrupciones.length;
+					cellTiempoPerd.innerHTML = arrayTareas[j].tiempoPerdido;						
+					cellInd.innerHTML = crearBoton(j);
+				}
+			}
+			
+		//Se rea una función que es llamada cuando el usuario indica que una tarea se ha finalizado
+			function tareaFin(posicion){
+				arrayTareas[posicion].finalizada = "Si";
+				console.log("tarea finalizada" + posicion);
+				mostrarTareasBucle();
+				disableButon(posicion);
+				
+			}
+		//Crear boton habilitado o sin habilitar
+			function crearBoton(posicion){
+				if (arrayTareas[posicion].finalizada === "No"){
+					innerHtml = "<button id='"+j+"' onclick='tareaFin("+j+")'>Task ended</button>"
+				}
+				else if (arrayTareas[posicion].finalizada === "Si"){
+					innerHtml = "<button id='"+j+"' onclick='tareaFin("+j+")' disabled>Task ended</button>"
+				}
+				return innerHtml;
+			}
+		//Se crea una función que deshabilita el boton de indicar que una tarea está finalizada
+			function disableButon(iden){
+				id = iden;
+				document.getElementById(id).disabled = true;
+			}
+		
+		/*Se crea una función que es llamada cada vez que finaliza un tiempo y que añade un elemento 
+		al array de numeroTiempos con el nombre de la tarea seleccionada*/
+			function agregarPomodoro(tiempoIn){
+				if( tipoTiempo === 0){
+					numeroTiempos.push(tareaSelec);
+					console.log(numeroTiempos);
+					tareaSelec.pomodorosUsados +=1
+					console.log(tareaSelec);
+					console.log(arrayTareas);
+					//Se modifica también el valor en la tabla que muestra lo usuarios
+					mostrarTareasBucle();
+				}
+			}
+		//Se crea una función que selecione la tarea y asigne a esa tarea los Pomodoros usados
+			function seleccTask(){
+				seconds = 0;
+				time = tiempoInicio;
+				indiceTarea = document.getElementById("startTarea").value;
+				console.log(indiceTarea);
+				tareaSelec = arrayTareas[indiceTarea];
+				alert("The countdown will start inmediatly. Prepare all what you need for your task ;)")
+				cuentaAtras(time, seconds);
+				console.log(tareaSelec);
+			}
+		//Se crea un función que añada la tarea recien creada a la lista de opciones
+			function tareaAopciones(task, indexArray){
+				var option = document.createElement("option");
+				option.text = task.nombre;
+				option.value = indexArray;
+				var select = document.getElementById("startTarea");
+				select.appendChild(option);
+			}
+		
+		//Se crea una función que crea una interrupción, es decir, se para el tiempo y se registra dicha interrupción dentro de la tarea que se está realizando
+			function interrupcionFuncion(){
+			document.getElementById("nombreInterrupcion").value = "";
+			//Primero se para el tiempo
+			interrupcionTF = 1;
+			clearInterval(interval);
+			tiempoParado = document.getElementById("tiempo").innerHTML				
+			time = tiempoParado.slice(0,2);				
+			seconds = tiempoParado.slice(3);
+			cronometro(minInterrupcion,secInterrupcion);
+			
+			}
+		//Se crea una función "crónometro que muestra el tiempo que se va perdiento en una interrupción."
+			function cronometro(m,s){
+				
+				clearInterval(interval);
+				intervalCronometro = setInterval(function(){
+					if(s == 59) { 
+						s = 0;
+						m++
+					}
+					else{s++}
+	
+					showCronometro(m,s);
+					
+					//document.getElementById("cronoInterrupcion").innerHTML = m + ":"+ s;
+					
+				},150);
+			}
+		
+		//Se crea una función para mostrar el tiempo del cronometro de interrupciones
+			function showCronometro(min,seg){
+				mStr = min.toString();
+				sStr = seg.toString();
+				lenMin = mStr.length;
+				lenSeg = sStr.length;
+				/*console.log ("mStr:" + mStr);
+				console.log ("sStr:" + sStr);
+				console.log ("lenMin:" + lenMin);
+				console.log ("lenSeg:" + lenSeg);*/
+				
+				if (lenMin == 2 && lenSeg == 2){
+					document.getElementById("cronoInterrupcion").innerHTML = min + ":"+ seg;					
+				}
+				else if (lenMin == 2 && lenSeg == 1){
+					document.getElementById("cronoInterrupcion").innerHTML = min + ":0"+ seg;
+				}
+				else if (lenMin == 1 && lenSeg == 1){
+					document.getElementById("cronoInterrupcion").innerHTML = "0" + min + ":0"+ seg;
+				}
+				else if (lenMin == 1 && (lenSeg == 2 || seg === 0) ){
+					document.getElementById("cronoInterrupcion").innerHTML = "0" + min + ":"+ seg;
+				}
+			}
+			
+		/*Se crea una función, que es llamada inmediatamente despues de que se reinicie("Start") el tiempo de trabajo 
+		tras una interrupción, para registar deicha interrupción como un objeto dentro del objeto tarea al que corresponde.
+		Para evitar que el usuario registre interrupciones por error dentro de un break se utiliza la variable "tipoTiempo" que 
+		indica si el temporizador esta en un pomodoro o en un break*/
+			function registrarInterrupcion(){
+				tiempoInterrupcion = document.getElementById("cronoInterrupcion").innerHTML;
+				if (tipoTiempo === 0){
+					console.log("ahora se registra la interrupcion")
+					interrupcion = new Object();
+					interrupcion.nombre = document.getElementById("nombreInterrupcion").value;
+					interrupcion.duracion = document.getElementById("cronoInterrupcion").innerHTML;
+					interrupcion.minutos = parseInt(tiempoInterrupcion.slice(0,2));
+					interrupcion.segundos = parseInt(tiempoInterrupcion.slice(3));
+					interrupcion.tarea = tareaSelec.nombre
+					console.log("interrupcion" + interrupcion);
+					console.log(interrupcion);
+					tareaSelec.interrupciones.push(interrupcion);
+					console.log(tareaSelec)
+					console.log("array tareas");
+					console.log(arrayTareas);
+					
+					arrayInterrupciones.push(interrupcion);
+					mostrarInterrupciones();
+					tiempoPerdido();
+					mostrarTareasBucle();
+				}
+				interrupcionTF = 0;
+			}
+			
+		// Se crea una función para calcular el tiempo total gastado en interrupciones de cada tarea:
+			function tiempoPerdido(){
+				var minutP = 0;
+				var segunP = 0;
+				var segAmin;
+				var minPfin;
+				var segPfin;
+				
+				for(j = 0;j < arrayTareas.length; j++){
+					
+					if (arrayTareas[j].interrupciones.length > 0){
+						for(z = 0; z < arrayTareas[j].interrupciones.length; z++){					
+							minPfin = 0;
+							segPfin = 0;
+							
+							minutP = minutP + arrayTareas[j].interrupciones[z].minutos;
+							segunP = segunP + arrayTareas[j].interrupciones[z].segundos;
+							segAmin = parseInt(segunP/60);
+							segPfin = segunP%60;
+							minPfin = minutP + segAmin;
+							
+							arrayTareas[j].tiempoPerdido = minPfin + " min " + segPfin + " seg"
+							
+						}
+					segunP = 0;
+					minutP = 0;	
+						
+					}
+				}
+				tiempoPerdidoTotal();
+			}
+			
+		//Se crea una función para mostrar el tiempo perdido total
+		
+			function tiempoPerdidoTotal(){
+				var minSuma = 0;
+				var segSuma = 0
+				var segTotales = 0;
+				var minTotales = 0;
+				for(z = 0; z < arrayInterrupciones.length; z++){
+					minSuma = minSuma + arrayInterrupciones[z].minutos;
+					segSuma = segSuma + arrayInterrupciones[z].segundos;
+					segAmin = parseInt(segSuma/60);
+					minTotales = minSuma + segAmin;
+					segTotales = segSuma%60;
+				}
+				document.getElementById("totalTiempoPerdido").innerHTML = minTotales + " min " + segTotales + " seg";
+			}
+		//Se crea la función para mostrar las interrupciones del arrayInterrupciones creado
+			function mostrarInterrupciones(){
+				var tableInterrupciones = document.getElementById("tablaInterrupciones");
+				
+				while(tableInterrupciones.rows.length > 1) {
+						tableInterrupciones.deleteRow(1);
+					}
+				for(j = 0; j < arrayInterrupciones.length; j++){
+					var row = tableInterrupciones.insertRow(-1);	
+					
+					var cellNombre = row.insertCell(0);
+					var cellTareaInterrumpida = row.insertCell(1);
+					var cellDuracion = row.insertCell(2);
+					
+					
+					cellNombre.innerHTML = arrayInterrupciones[j].nombre;
+					cellTareaInterrumpida.innerHTML = arrayInterrupciones[j].tarea;
+					cellDuracion.innerHTML =  arrayInterrupciones[j].duracion + " minutos";
+						
+					
+				}
+			}
+		
+		//Función para mostrar el cronometro de interrupciones
+			function mostrarCronoInterrupciones(){
+				document.getElementById("cronoInterrupciones").style.visibility = "visible";
+			}
+		</script>
+	</body>
+</html>

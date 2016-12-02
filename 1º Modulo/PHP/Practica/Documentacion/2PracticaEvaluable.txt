@@ -1,0 +1,37 @@
+MAQUTADORES:
+
+VISTA:
+
+En todas las pantallas debe haber un boton para poder logearse, 
+al pulsar seran visibles los campos de nombre y pass,
+ademas de los botones de iniciar sesion y solicitar admin, 
+si pulsa solicitar admin, deben mostrar los campos:
+ -
+ -
+ -
+Comprobarlo con mysql. Y ponerlo en el $_session.
+
+Tambien debe haber un menu en el que se muestren los enlaces al resto de las paginas.
+
+Paginas:
+ -Noticias.
+ -Documentacion.
+ -Legislacion.
+ -Eventos.
+
+--------------------------------------------------------------
+PROGRAMADORES:
+
+MODELO:
+ 
+-Funcion para conectar con BD.
+-Funcion para logear usuario.
+-Funcion para comprobar si es admin($_session).
+-Funcion para enviar solicitud de admin.
+-Funcion para cambiar de pagina web.
+-Funcion para mostrar documentacion.
+-Funcion para mostrar legislacion.
+-Funcion para descargar por pdf.
+-Funcion para mostrar multimedia.
+-Funcion para mostrar eventos.
+

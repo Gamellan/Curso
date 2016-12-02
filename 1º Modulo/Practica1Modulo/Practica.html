@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Herramienta Pomodoro</title>
+		<link rel="stylesheet" href="estilos.css">
+	</head>
+	<body>
+		<header>
+			<h2>Herramienta Pomodoro</h2>
+		</header>
+		<aside>
+			<!-- Mostrar Pomodoro, descanso corto y descanso largo, en un lista en bloque. -->
+			<ul>
+				<li id="pomodoro" onclick="trabajar()">POMODORO</li>
+				<li id="descansoC" onclick="descansoC()">DESCANSO CORTO</li>
+				<li id="descansoL" onclick="descansoL()">DESCANSO LARGO</li>
+			</ul>
+		</aside>
+		<section>
+			<article>
+				<!-- Mostrar tiempo, opcion para cambiar la duracion, la alarma, las tareas y las interrupciones -->
+				<div align="center">
+					<h3 id="titulo" align="center">POMODORO</h3><br/>
+					<font align="right">Lista alarmas</font><br/>
+					<input id="cambiaTiempo" type="number" placeholder="Tiempo en minutos"></input>
+					<input type="button" value="Cambiar tiempo" onclick="estableceTiempo()"></input>
+					<select id="listaCanciones">
+						<!-- Crearlo en JS, poner con onselected=metodo() -->
+					</select>
+					<input id="seleccionarCancion" type="button" value="Seleccionar" onclick="canciones()"></input>
+					<h1 id="tiempo">25:00</h1>
+					<input id="bAlarma" type="button" value="Parar Alarma" onclick="pararAlarma()"></input>
+					<p id="tareaActual" align="center"></p>
+					<audio id="cancion" loop>
+							<source src="Recursos/cancion3.mp3" type="audio/mp3">
+							Your browser does not support the audio tag.
+						</audio>
+					<div id="acciones" align="center">
+						Tarea seleccionada: 
+						<select id="listaTareas">
+							<!-- Crearlo en JS, poner con onselected=metodo() -->
+						</select>
+						<input type="button" value="Iniciar" onclick="Iniciar()"></input>
+						<input type="button" value="Pausar" onclick="Pausar()"></input>
+						<input type="button" value="Detener" onclick="Detener()"></input><br/>
+					</div>
+					<div id="tareas"  align="center">
+						<h3>Nueva tarea</h3>
+						<input id="nuevaTarea" type="text" placeholder="Titulo"></input>
+						<input id="estimado" type="number" placeholder="Pomodoros estimados"></input>
+						<input type="button" value="Agregar tarea" onclick="crearTarea()"></input>
+					</div>
+				</div>
+			</article>
+			<article id="resultados">
+				<!-- Lista de tareas completadas, con la hora a la que se inicio y a la que se acabo, mostrar la tarea desempeñada, el tiempo estimado, y las interrupciones. -->
+				<!-- Tabla en JS con el listado de las tareas terminadas, actulizar cada vez que detiene una alarma. -->
+				<h1 align="center">Lista de tareas realizadas</h1>
+			</article>		
+		</section>
+	<script>
+		//boton alarma
+		var bAlarma = document.getElementById("bAlarma");
+		bAlarma.style.display = "none";
+		//booleanos para estados del reloj
+		var iniciado = false;
+		var pausado = false;
+		var descanso = false;
+		//contadores del tiempo
+		var tiempoInicial = 25;
+		var contador_m = tiempoInicial;
+		var contador_s = 0;
+		//Reloj visual en la pagina
+		var reloj = document.getElementById("tiempo");
+		//lista de canciones
+		var listaCanciones = document.getElementById("listaCanciones");
+		listaCanciones.innerHTML = "<option value='cancion1'>Jack Sparrow</option><option value='cancion2'>Lollipop</option><option selected  value='cancion3'>Notificacion</option>"
+		var cancion = document.getElementById("cancion");
+		
+		var tareaActual = {nombre:"Trabajo", estimados:1, reales:0};
+		var tareas = [tareaActual];
+		
+		var labelTarea = document.getElementById("tareaActual");
+		labelTarea.innerHTML = tareas[0].nombre;
+		
+		var listaTareas = document.getElementById("listaTareas");
+		mostrarTareas();
+		
+		function trabajar(){
+			document.getElementById("titulo").innerHTML="POMODORO";
+			tiempoInicial = 25;
+			contador_s = 0;
+			descanso = false;
+			ponerReloj();
+		}
+		function descansoC(){
+			document.getElementById("titulo").innerHTML="DESCANSO CORTO";
+			tiempoInicial = 5;
+			contador_s = 0;
+			descanso = true;
+			ponerReloj();
+		}
+		function descansoL(){
+			document.getElementById("titulo").innerHTML="DESCANSO LARGO";
+			tiempoInicial = 15;
+			contador_s = 0;
+			descanso = true;
+			ponerReloj();
+		}
+		function ponerReloj(){
+			reloj.innerHTML = (0+""+tiempoInicial).slice(-2) + ":" + (0+""+contador_s).slice(-2);
+			contador_m=tiempoInicial;
+			contador_s=0;
+		}
+		function estableceTiempo(){
+			if(!iniciado && !pausado){
+				var aux = document.getElementById("cambiaTiempo").value;
+				if(aux<=0){
+					alert("No puedes establecer un tiempo nulo o negativo");
+				}else{
+					tiempoInicial = aux;
+					document.getElementById("cambiaTiempo").value= "";
+					ponerReloj();
+				}
+			}else{
+				alert("Solo puedes asignar el tiempo cuando el cronometro esta pausado.");
+			}
+		}
+		function Iniciar(){
+			if(!iniciado){
+				iniciado = true;
+				pausado = false;
+				for(i=0;i<tareas.length;i++){
+					if(tareas[i].nombre == listaTareas.options[listaTareas.selectedIndex].value){
+						tareaActual = tareas[i];
+					}
+				}
+				iniciarIntervalo = setInterval(cuentaAtras, 50);
+			}
+		}
+		function cuentaAtras(){
+			if(contador_m==0 && contador_s==0){
+				Detener();
+				alarma();
+				if(!descanso){
+					for(i=0;i<tareas.length;i++){
+						if(tareas[i].nombre == tareaActual.nombre){
+							tareas[i].reales++;
+						}
+					}
+					resultados();
+				}
+			}else{
+				if(contador_s == 0){
+					contador_s=59;
+					contador_m--;
+				}else{
+					contador_s--;
+				}
+				reloj.innerHTML = (0+""+contador_m).slice(-2) + ":" + (0+""+contador_s).slice(-2);
+			}
+		}
+		function Pausar(){
+			iniciado = false;
+			pausado = true;
+			clearInterval(iniciarIntervalo);
+		}
+		function Detener(){
+			iniciado = false;
+			pausado = false;
+			clearInterval(iniciarIntervalo);
+			contador_m = tiempoInicial;
+			contador_s = 0;
+			reloj.innerHTML = (0+""+contador_m).slice(-2) + ":" + (0+""+contador_s).slice(-2);
+		}
+		function alarma(){
+			bAlarma.style.display = "inline";
+			cancion.play();
+		}
+		function canciones(){
+			cancion.src="Recursos/"+listaCanciones.options[listaCanciones.selectedIndex].value + ".mp3";
+		}
+		function pararAlarma(){
+			cancion.pause();
+			cancion.currentTime = 0;
+			bAlarma.style.display = "none";
+		}
+		function crearTarea(){
+			var tarea = {nombre:document.getElementById("nuevaTarea").value, estimados:document.getElementById("estimado").value, reales:0};
+			if(tarea.nombre.trim() == ""){
+				alert("Debes escribir algo.");
+			}else{
+				tareas.push(tarea);
+				document.getElementById("nuevaTarea").value = "";
+				document.getElementById("estimado").value = "";
+				mostrarTareas();
+			}
+		}
+		function mostrarTareas(){
+		 var cad = "";
+			for(i=0;i<tareas.length;i++){
+				cad+="<option value='"+tareas[i].nombre+"'>"+tareas[i].nombre+"</option>"
+			}
+			document.getElementById("listaTareas").innerHTML = cad;
+		}
+		function resultados(){
+			//Aqui mostrar las tablas.
+			var cad = "<h1 align='center'>Lista de tareas realizadas</h1><table width='100%'><tr><th>Tarea</th><th>Tiempo Estimado</th><th>Tiempo Real</th><th>Progreso</th></tr>";
+			for(i=0; i<tareas.length;i++){
+				cad+="<tr align='center'>";
+				cad+="<td>" + tareas[i].nombre + "</td>";
+				cad+="<td>" + tareas[i].estimados + "</td>";
+				cad+="<td>" + tareas[i].reales + "</td>";
+				if((tareas[i].reales/tareas[i].estimados)*100 <=100){
+					cad+="<td><progress value="+(tareas[i].reales/tareas[i].estimados)*100+" max='100'></progress></td>";
+				}else{
+					cad+="<td><progress class='tehaspasao' value="+(tareas[i].reales/tareas[i].estimados)*100+" max='100'></progress></td>";
+				}
+				
+				cad+="</tr>";
+			}
+			cad+="</table>";
+			document.getElementById("resultados").innerHTML = cad;
+		}
+	</script>
+	</body>
+</html>

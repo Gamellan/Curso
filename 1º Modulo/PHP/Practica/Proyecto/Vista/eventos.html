@@ -1,0 +1,131 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>EVENTOS</title> 
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+	<main>
+		<aside>
+			<div id="logo"> <img src="imagenes/logo.gif" width="150px" height="150px"> </div>
+			<ul >
+				<li>
+					<a href="delegados.html"><img src="imagenes/icono_usuario.png" /> Usuarios</a>
+				</li>
+				<li>
+					<a href="noticias.html"><img src="imagenes/icono_noticia.png" /> Noticias</a>
+				</li>
+				<li>
+					<a href="documentos.html"><img src="imagenes/icono_documento.png" /> Documentos</a>
+				</li>
+				<li>
+					<a href="eventos.html"><img src="imagenes/icono_evento.png" /> Eventos</a>
+				</li>
+				<li>
+					<a href="multimedia.html"><img src="imagenes/icono_multimedia.png" /> Multimedia</a>
+				</li>
+			</ul>
+		</aside>
+			<section>
+				<div id="encabezado">
+					<h1>Eventos</h1>
+				</div><br/>
+				<details id="nuevo" open>
+					<summary>CREAR EVENTO</summary></br>
+					<form ENCTYPE="multipart/form-data" name="formulario" method="post" action="nuevosEventos.php">
+						</br><h2>Nuevo evento:</h2></br>
+						<table id="formularioEvento">
+							<tr>
+								<td>Tipo:</td>
+								<td><select name="tipo">    
+									<option value="" selected="selected">Seleccione una opción</option>
+									<option value="Congreso">Congreso</option>
+									<option value="Taller">Taller</option>
+									<option value="Jornada">Jornada</option>
+									<option value="Stand">Stand Informativo</option>
+									<option value="Otros">Otros</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td name="fInicio">Fecha inicio:</td>
+								<td><input type="date" name="fInicio"/></td>
+								<td name="fFin">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha fin:</td>
+								<td><input type="date" name="fFin"/></td>
+							</tr>
+							<tr>
+								<td name="hora">Hora:</td>
+								<td><input type="time" name="hora"/></td>
+								<td name="duracion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duraci&oacute;n:</td>
+								<td><input type="number" name="duracion" min="1"/> minutos</td>
+							</tr>
+							<tr>
+								<td name="lugar">Lugar:</td>
+								<td><input type="text" name="lugar"/></td>
+							</tr>
+							<tr>
+								<td>Cupo:</td>
+								<td><input type="number" min="1" name="cupo"/> personas</td>
+							</tr>
+							<tr>
+								<td>Inscribirse:</td>
+								<td>
+									<input type="radio" name="radioInscripcion">Sí
+									<input type="radio" name="radioInscripcion">No
+								</td>
+							</tr>
+							<tr>
+								<td>Descripci&oacute;n:</td>
+								<td colspan="3"><textarea name="descripcion" rows="5" cols="60"></textarea></td>
+							</tr>
+							<tr>
+								<td>Adjuntar imagen:</td>
+								<td colspan="3"><input name="imagenEvento" type="file"id="adjuntar"/></td>
+							</tr>
+						</table></br>
+						<div>
+							<button><input type="submit" hidden><img src="./imagenes/icono_agregar.png"/> Agregar</button>
+						</div></br>
+					</form></br>
+				</details>
+				</br>
+				<!--</br><button onclick="mostrarEventos()"><img src="./imagenes/icono_lista.png"/> Mostrar eventos</button></br></br>-->
+				<details id="listado">
+					<summary>LISTADO DE EVENTOS</summary></br>
+					<table id="eventos">
+						<tr>
+							<td id="imgEvento" valign="top">
+								<img src="./imagenes/evento1.jpg" width="150" height="150"/></br>
+								Lugar: Barcelona</br>
+								Inscritos: 20/100
+							</td>
+							<td id="infoEvento">
+								Tipo: Congreso</br>
+								Fecha: 29/06/2017 - 01/07/2017</br>
+								Hora: 10:00h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duración: 120 min</br>
+								<i>Última modificación: 11/11/2016</i></br></br>
+								El Consejo Confederal reunido en sesión solemne en Barcelona el 11 de julio de 2016, fecha en la
+								que la CS de CCOO conmemora el 40 Aniversario de la "Asamblea de Barcelona" celebrada en la
+								clandestinidad en la misma fecha de 1976, ha procedido a la convocatoria del XI Congreso
+								Confederal, que tendrá lugar en Madrid los días 29, 30 de junio y 1 de julio de 2017, con
+								la asistencia de 751 delegados y delegadas.</br>
+							</td>
+						</tr>
+					</table>
+					<div id="botones">
+						<button id="modificar" title="Modificar"><img src="./imagenes/icono_modificar.png" width="18px" height="18px"></button></br>
+						<button id="eliminar" title="Eliminar"><img src="./imagenes/icono_eliminar.png" width="18px" height="18px"></button>			
+					</div>
+					<div style="clear:left"></br></div>
+				</details>
+				
+				
+				
+				
+				
+			</section>
+		</main>
+	</body>
+</html>
